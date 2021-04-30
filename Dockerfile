@@ -6,7 +6,7 @@
 #    By: ivanloisy <ivanloisy@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/25 17:11:22 by ivanloisy         #+#    #+#              #
-#    Updated: 2021/04/29 01:24:30 by ivanloisy        ###   ########.fr        #
+#    Updated: 2021/04/30 00:52:45 by ivanloisy        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ RUN apt-get install php7.3 php7.3-fpm php7.3-gd php7.3-mysql php7.3-curl php7.3-
 RUN apt-get install mariadb-server mariadb-client -y
 RUN apt-get install wget -y
 RUN wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 # RUN mkdir /etc/nginx/ssl
 RUN mkdir -p /var/www/localhost/phpmyadmin
@@ -30,9 +31,10 @@ COPY ./srcs/init.sh ./
 COPY ./srcs/localhost /etc/nginx/sites-available
 #COPY ./srcs/phpmyadmin /etc/nginx/sites-available
 # COPY ./srcs/nginx.conf /etc/nginx
-COPY ./srcs/index.html /var/www/localhost
+#COPY ./srcs/index.html /var/www/localhost
 COPY ./srcs/phpinfo.php /var/www/localhost
 COPY ./srcs/config.inc.php /var/www/localhost/phpmyadmin/config.inc.php
+COPY ./srcs/wordpress /var/www/localhost
 
 RUN chmod 660 /var/www/localhost/phpmyadmin/config.inc.php
 RUN chown -R www-data:www-data /var/www/localhost/phpmyadmin
